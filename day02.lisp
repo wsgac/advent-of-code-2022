@@ -1,6 +1,6 @@
-(in-package #:advent-of-code-2022)
+(in-package #:advent-of-code-2022.day02)
 
-(defparameter *day-02-input-01*
+(defparameter *input*
   "C X
 B Y
 C Z
@@ -2502,7 +2502,7 @@ A X
 C Y
 B X")
 
-(defparameter *day-02-input-01-test*
+(defparameter *input-test*
   "A Y
 B X
 C Z")
@@ -2553,19 +2553,19 @@ C Z")
     (+ (pair-to-outcome theirs yours)
        (shape-to-score yours))))
 
-(defun day-02-process-input (input)
+(defun process-input (input)
   (loop
     for (theirs yours) on (cl-ppcre:split "[\\n\\s]" input) by #'cddr
     collect (list theirs yours)))
 
-(defun day-02-puzzle-01 (&key (input *day-02-input-01*))
+(defun puzzle-01 (&key (input *input*))
   (loop
-    for (theirs yours) in (day-02-process-input input)
+    for (theirs yours) in (process-input input)
     sum (letter-pair-to-score theirs yours)))
 
-(defun day-02-puzzle-02 (&key (input *day-02-input-01*))
+(defun puzzle-02 (&key (input *input*))
   (loop
-    for (th y) in (day-02-process-input input)
+    for (th y) in (process-input input)
     for theirs = (letter-to-shape th)
     for outcome = (letter-to-outcome y)
     for yours = (theirs-and-outcome-to-yours theirs outcome)

@@ -1,6 +1,6 @@
-(in-package #:advent-of-code-2022)
+(in-package #:advent-of-code-2022.day03)
 
-(defparameter *day-03-input-01-test*
+(defparameter *input-test*
   "vJrwpWtwJgWrhcsFMMfFFhFp
 jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
 PmmdzqPrVvPwwTWBwg
@@ -8,7 +8,7 @@ wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
 ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw")
 
-(defparameter *day-03-input-01*
+(defparameter *input*
   "LdHVLDLDdHdtLMhcqCqGWcWg
 ZZQZSZnnJrQrJQJbfzfnWGWPWMcChMMPcqMnhFcF
 ZrzpWzfbpQpWbzvZWZpdtVtDNmRHNVptNDHt
@@ -310,7 +310,7 @@ FmcGcjLRPjQwQjMQrwHQ
 btJzJbVNdBJJtzTdGBbdBztGrQhhQWhMwHrhrHSHgHQfhMVS
 JJDpdDTtCtzNptnTJBznnvLCCvcFqsRqFcvZclLGRR")
 
-(defun day-03-process-data (input &key (compartments t))
+(defun process-data (input &key (compartments t))
   (loop
     for line in (cl-ppcre:split "\\n" input)
     for line-len = (length line)
@@ -327,15 +327,15 @@ JJDpdDTtCtzNptnTJBznnvLCCvcFqsRqFcvZclLGRR")
     ((char<= #\A letter #\Z)
      (+ 27 (- (char-code letter) (char-code #\A))))))
 
-(defun day-03-puzzle-01 (&key (input *day-03-input-01*))
+(defun puzzle-01 (&key (input *input*))
   (loop
-    for (c1 c2) in (day-03-process-data input)
+    for (c1 c2) in (process-data input)
     for common = (car (intersection c1 c2))
     sum (letter-to-priority common)))
 
-(defun day-03-puzzle-02 (&key (input *day-03-input-01*))
+(defun puzzle-02 (&key (input *input*))
   (loop
-    for (r1 r2 r3) on (day-03-process-data input :compartments nil) by #'cdddr
+    for (r1 r2 r3) on (process-data input :compartments nil) by #'cdddr
     for badge = (reduce #'intersection (list r1 r2 r3))
     for badge-priority = (letter-to-priority (car badge))
     sum badge-priority))

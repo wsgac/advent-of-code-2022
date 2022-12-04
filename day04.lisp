@@ -1,6 +1,6 @@
-(in-package #:advent-of-code-2022)
+(in-package #:advent-of-code-2022.day04)
 
-(defparameter *day-04-input-01-test*
+(defparameter *input-test*
   "2-4,6-8
 2-3,4-5
 5-7,7-9
@@ -8,7 +8,7 @@
 6-6,4-6
 2-6,4-8")
 
-(defparameter *day-04-input-01*
+(defparameter *input*
   "33-62,26-62
 49-89,49-88
 2-4,3-92
@@ -1010,7 +1010,7 @@
 31-37,37-72
 21-99,1-25")
 
-(defun day-04-process-data (input)
+(defun process-data (input)
   (let ((pairs nil))
    (cl-ppcre::do-register-groups (a b c d) ("(\\d+)-(\\d+),(\\d+)-(\\d+)" input)
      (when (every #'stringp (list a b c d))
@@ -1032,12 +1032,12 @@
    ;; B to the left of A
    (and (<= b-from a-to) (>= b-to a-from))))
 
-(defun day-04-puzzle-01 (&key (input *day-04-input-01*))
+(defun puzzle-01 (&key (input *input*))
   (loop
-    for pairs in (day-04-process-data input)
+    for pairs in (process-data input)
     count (apply #'one-contains-the-other pairs)))
 
-(defun day-04-puzzle-02 (&key (input *day-04-input-01*))
+(defun puzzle-02 (&key (input *input*))
   (loop
-    for pairs in (day-04-process-data input)
+    for pairs in (process-data input)
     count (apply #'one-overlaps-with-the-other pairs)))

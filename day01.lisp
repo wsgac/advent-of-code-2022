@@ -1,6 +1,6 @@
-(in-package #:advent-of-code-2022)
+(in-package #:advent-of-code-2022.day01)
 
-(defparameter *day-01-input-01-test*
+(defparameter *input-test*
   "1000
 2000
 3000
@@ -16,7 +16,7 @@
 
 10000")
 
-(defparameter *day-01-input-01*
+(defparameter *input*
   "9195
 5496
 2732
@@ -2289,22 +2289,22 @@
 2464")
 
 
-(defun day-01-process-input (input)
+(defun process-input (input)
   (let* ((groups (cl-ppcre:split "\\n\\n" input)))
     (mapcar #'(lambda (group)
 		(mapcar #'(lambda (s) (parse-integer s :junk-allowed nil))
 			(cl-ppcre:split "\\n" group))) groups)))
 
 
-(defun day-01-puzzle-01 (&key (input *day-01-input-01*))
-  (let ((number-groups (day-01-process-input input)))
+(defun puzzle-01 (&key (input *input*))
+  (let ((number-groups (process-input input)))
     (loop
       for group in number-groups
       for group-sum = (reduce #'+ group)
       maximize group-sum)))
 
-(defun day-01-puzzle-02 (&key (input *day-01-input-01*))
-  (let* ((number-groups (day-01-process-input input))
+(defun puzzle-02 (&key (input *input*))
+  (let* ((number-groups (process-input input))
 	 (sums (mapcar #'(lambda (group) (reduce #'+ group)) number-groups))
 	 (sorted-sums (sort sums #'>)))
     (apply #'+ (subseq sorted-sums 0 3))))
