@@ -2,7 +2,8 @@
 
 (defpackage #:advent-of-code-2022.util
   (:nicknames #:aoc2022.util #:util)
-  (:use #:cl))
+  (:use #:cl)
+  (:export :transpose))
 
 (defpackage #:advent-of-code-2022.day01
   (:nicknames #:aoc2022.day01)
